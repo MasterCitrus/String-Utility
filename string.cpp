@@ -45,7 +45,7 @@ String::~String() {
 
 //Get length of string.
 size_t String::Length() const {
-	int length;
+	size_t length;
 	length = strlen(_str);
 	return length;
 }

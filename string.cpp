@@ -1,6 +1,8 @@
 #include "String.h"
 #include <iostream>
 
+//Constructors + destructors
+
 //Default constructor.
 String::String() : _str{ nullptr } {
 	_str = new char[1];
@@ -39,6 +41,8 @@ String::~String() {
 	delete _str;
 }
 
+//Member functions
+
 //Get length of string.
 size_t String::Length() const {
 	int length;
@@ -48,7 +52,7 @@ size_t String::Length() const {
 
 //Finds character at specified index.
 char& String::CharacterAt(size_t index) {
-
+	
 }
 
 //Finds character at specified index.
@@ -67,12 +71,12 @@ bool String::EqualTo(const String& other) const {
 }
 
 
-//Concatenate string to the front.
+//Concatenate string to the back.
 String& String::Append(const String& str) {
 	
 }
 
-//Concatenate string to the back.
+//Concatenate string to the front.
 String& String::Prepend(const String& str) {
 
 }
@@ -84,12 +88,16 @@ const char* String::CStr() const {
 
 //Returns string with all characters in lower case.
 String& String::ToLower() {
-	
+	for (int i = 0; i < this->Length(); i++) {
+		this->_str[i] = std::tolower(this->_str[i]);
+	}
 }
 
 //Returns string with all characters in upper case.
 String& String::ToUpper() {
-
+	for (int i = 0; i < this->Length(); i++) {
+		this->_str[i] = std::toupper(this->_str[i]);
+	}
 }
 
 //Find string.

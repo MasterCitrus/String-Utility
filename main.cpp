@@ -2,10 +2,11 @@
 #include <iostream>
 
 int main() {
-	String str1 = "Hello";
-	String str2 = "World";
-
-	str1.Append(str2);
-
-	std::cout << str1.CStr() << std::endl;
+	String one = "One";
+	String two = "Two";
+	String three;
+	std::cout << one.CStr() << " + " << two.CStr() << std::endl;
+	three = one + two;
+	std::cout << three.CStr() << std::endl;
+	std::cout << one.CStr() << " " << two.CStr() << std::endl;
 }

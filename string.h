@@ -28,6 +28,8 @@ public:
 	String& operator=(const String& str);
 	char& operator[](size_t index);
 	const char& operator[](size_t index) const;
+	String operator+(const String& other);
+	String& operator+=(const String& other);
 
 private:
 	char* _str;

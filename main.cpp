@@ -1,12 +1,9 @@
 #include "String.h"
 #include <iostream>
+#include <string>
 
 int main() {
-	String one = "One";
-	String two = "Two";
-	String three;
-	std::cout << one.CStr() << " + " << two.CStr() << std::endl;
-	three = one + two;
-	std::cout << three.CStr() << std::endl;
-	std::cout << one.CStr() << " " << two.CStr() << std::endl;
+	String one = "This is a test string";
+	one.Wobble();
+	std::cout << one.CStr();
 }

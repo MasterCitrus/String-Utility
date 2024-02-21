@@ -23,14 +23,18 @@ public:
 	String& ReadFromConsole();
 	String& WriteToConsole();
 
+	String& Wobble();
+
 	bool operator==(const String& other);
 	bool operator!=(const String& other);
 	String& operator=(const String& str);
 	char& operator[](size_t index);
 	const char& operator[](size_t index) const;
-	String operator+(const String& other);
+	String operator+(const String& other) const;
 	String& operator+=(const String& other);
 
 private:
 	char* _str;
+	enum class AdoptPointer {};
+	String(AdoptPointer, char* str);
 };

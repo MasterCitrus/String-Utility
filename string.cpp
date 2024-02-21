@@ -1,5 +1,4 @@
 #include "String.h"
-#include <iostream>
 
 
 //Constructors + destructors
@@ -113,6 +112,18 @@ String& String::operator+=(const String& other) {
 	_str = str;
 	return *this;
 }
+
+//Insertion operator << overload
+std::ostream& operator<<(std::ostream& out, const String& str) {
+	return out << str.CStr();
+}
+
+////Extraction operator >> overload
+//std::istream& operator>>(std::istream& in, String& str) {
+//	in.getline(str._str, sizeof(str._str));
+//	str._str[str.Length()] = '\0';
+//	return in >> str._str;
+//}
 
 //Member functions
 

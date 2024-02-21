@@ -4,8 +4,8 @@
  ## Description
  This string class is for an assessment for uni.
  It is a predominantly a wrapper class for cstring functions.
-
- The class has an assortment of functions. These include:
+ ## Functions
+  The class has an assortment of functions. These include:
  ```
  Length()
  CharacterAt()
@@ -21,9 +21,6 @@
  WriteToConsole()
  Wobble()
  ```
-
- ## Functions
-
  ### Length()
  The length function returns the length of the string.
  It gets the string length using the strlen() function, returning the result as a size_t value;
@@ -42,6 +39,7 @@
  The append function concatenates a string at the end of another string.
  It does this using a combination of strcpy() and strcat().
  It returns a reference of itself.
+
 
  ### Prepend()
  The prepend function concatenates a string at the beginning of another string.
@@ -81,3 +79,5 @@
  ### Wobble()
  The wobble function alternates letters in sequence between lowercase and uppercase.
  It returns a reference of itself
+
+ # **Testing Class**

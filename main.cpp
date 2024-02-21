@@ -4,6 +4,13 @@
 
 int main() {
 	String one = "This is a test string";
-	one.Wobble();
-	std::cout << one.CStr();
+	String two = "A second test string";
+	String three;
+	String four;
+	String five;
+	three = one + " || " + two;
+	std::cout << one << " | " << two << std::endl;
+	std::cout << three << std::endl;
+	std::cin >> five;
+	std::cout << std::endl << "Output: " << five << std::endl;
 }

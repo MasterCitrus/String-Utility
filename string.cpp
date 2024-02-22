@@ -28,6 +28,7 @@ String::String(const char* str) {
 
 //Copy constructor.
 String::String(const String& other) {
+
 	_str = new char[other.Length() + 1];
 
 	for (int i = 0; i < other.Length(); i++) {
@@ -37,6 +38,7 @@ String::String(const String& other) {
 	_str[String::Length()] = '\0';
 }
 
+//Wacky constructor???
 String::String(AdoptPointer, char* str) : _str{str} {
 
 }
@@ -66,8 +68,22 @@ bool String::operator!=(const String& other) {
 	return true;
 }
 
+//Less than operator < overload
+bool String::operator<(const String& other) {
+
+	return true;
+}
+
+//Greater than operator > overload
+bool String::operator>(const String& other) {
+
+	return true;
+}
+
 //Assignment operator = overload
 String& String::operator=(const String& str) {
+	if (this == &str) return *this;
+	
 	delete[] _str;
 	size_t length = str.Length();
 	_str = new char[length + 1];
@@ -118,12 +134,11 @@ std::ostream& operator<<(std::ostream& out, const String& str) {
 	return out << str.CStr();
 }
 
-////Extraction operator >> overload
-//std::istream& operator>>(std::istream& in, String& str) {
-//	in.getline(str._str, sizeof(str._str));
-//	str._str[str.Length()] = '\0';
-//	return in >> str._str;
-//}
+//Extraction operator >> overload
+std::istream& operator>>(std::istream& in, String& str) {
+	str.ReadFromConsole();
+	return in;
+}
 
 //Member functions
 
@@ -218,16 +233,26 @@ size_t String::Find(size_t startIndex, const String& str) {
 	return -1;
 }
 
-////Replace all occurences of the first string with the second string.
-//String& String::Replace(const String& find, const String& replace) {
-//
-//}
-//
-////Convert input from console to string.
-//String& String::ReadFromConsole() {
-//
-//}
-//
+//Replace all occurences of the first string with the second string.
+String& String::Replace(const String& find, const String& replace) {
+
+	return *this;
+}
+
+//Convert input from console to string.
+String& String::ReadFromConsole() {
+	char c;
+	std::cin.get(c);
+	std::cin.putback(c);
+	std::streamsize size = std::cin.rdbuf()->in_avail();
+	String temp(AdoptPointer{}, new char[size + 1] {});
+	std::cin.readsome(temp._str, size);
+	temp[size] = '\0';
+	*this = temp;
+	&std::ostream::flush;
+	return *this;
+}
+
 //Output string to console.
 String& String::WriteToConsole() {
 	std::cout << _str;

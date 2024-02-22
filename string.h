@@ -32,6 +32,8 @@ public:
 	//Overloads
 	bool operator==(const String& other);
 	bool operator!=(const String& other);
+	bool operator<(const String& other);
+	bool operator>(const String& other);
 	String& operator=(const String& str);
 	char& operator[](size_t index);
 	const char& operator[](size_t index) const;

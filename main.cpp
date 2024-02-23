@@ -5,8 +5,8 @@
 int main() {
 	String one = "This is a test string";
 	String two = "A second test string";
-	String three;
-	String four;
+	String three = "is";
+	/*String four;
 	String five;
 	three = one + " || " + two;
 	std::cout << one << " | " << two << std::endl;
@@ -16,5 +16,6 @@ int main() {
 	five.Wobble();
 	std::cout << five << std::endl;
 
-	std::cout << std::strstr(one.CStr(), "is");
+	std::cout << std::strstr(one.CStr(), "is");*/
+
 }

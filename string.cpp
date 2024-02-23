@@ -223,13 +223,39 @@ String& String::ToUpper() {
 
 //Finds a substring in a string and returns it's location.
 size_t String::Find(const String& str) {
+	size_t s1Len = this->Length();
+	size_t s2Len = str.Length();
 	
+	for (size_t i = 0; i < s1Len; i++) {
+		size_t j;
+		for (j = 0; j < s2Len; j++) {
+			if (_str[i + j] != str[j]) {
+				break;
+			}
+		}
+		if (j == s2Len) {
+			return i;
+		}
+	}
 	return -1;
 }
 
 //Finds a substring from the specified index of a string and returns it's location.
 size_t String::Find(size_t startIndex, const String& str) {
-	
+	size_t s1Len = this->Length();
+	size_t s2Len = str.Length();
+
+	for (size_t i = startIndex; i < s1Len; i++) {
+		size_t j;
+		for (j = 0; j < s2Len; j++) {
+			if (_str[i + j] != str[j]) {
+				break;
+			}
+		}
+		if (j == s2Len) {
+			return i;
+		}
+	}
 	return -1;
 }
 

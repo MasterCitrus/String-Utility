@@ -40,7 +40,7 @@ String::String(const String& other) : _str{nullptr} {
 }
 
 //Move constructor.
-String::String(String&& other) noexcept {
+String::String(String&& other) noexcept : _str(nullptr) {
 	_str = other._str;
 	other._str = nullptr;
 }
@@ -96,17 +96,19 @@ String& String::operator=(const String& str) {
 	delete[] _str;
 	size_t length = str.Length();
 	_str = new char[length + 1];
-	strncpy(_str, str._str, length);
-	_str[length] = '\0';
+	strcpy(_str, str._str);
 
 	return *this;
 }
 
 //Move assignment operator = overload.
 String& String::operator=(String&& other) noexcept {
-	_str = other._str;
-	other._str = nullptr;
+	if (this != &other) {
+		delete[] _str;
 
+		_str = other._str;
+		other._str = nullptr;
+	}
 	return *this;
 }
 

@@ -33,5 +33,26 @@ int main() {
 	std::cout << "CHARACTER AT TEST" << std::endl;
 	std::cout << "Character at " << caIndex << ": " << testString.CharacterAt(caIndex) << std::endl << std::endl;;
 
+	//EQUAL TO
+	std::cout << "EQUAL TO TEST" << std::endl;
+	std::cout << "Is String 1: " << comp1 << " equal to " << "String 2: " << comp3 << " ?" << std::endl;
+	std::cout << comp1.EqualTo(comp3) << std::endl;
+	std::cout << "Is String 1: " << comp1 << " equal to " << "String 2: " << comp2 << " ?" << std::endl;
+	std::cout << comp1.EqualTo(comp2) << std::endl << std::endl;
+
+	//APPEND
+	std::cout << "APPEND TEST" << std::endl;
+	std::cout << "Append " << rhs << " to " << lhs << std::endl;
+	append = lhs;
+	append.Append(rhs);
+	std::cout << append << std::endl << std::endl;
+
+	//PREPEND
+	std::cout << "PREPEND TEST" << std::endl;
+	std::cout << "Prepend " << rhs << " to " << lhs << std::endl;
+	prepend = lhs;
+	prepend.Prepend(rhs);
+	std::cout << prepend << std::endl << std::endl;
+
 	
 }

@@ -85,5 +85,21 @@ int main() {
 		std::cout << "Find() could not find the string after " << caIndex << std::endl << std::endl;
 	}
 
-	
+	//REPLACE
+	std::cout << "REPLACE TEST" << std::endl;
+	std::cout << sentence << std::endl;
+	sentence.Replace(findR, replace);
+	std::cout << sentence << std::endl << std::endl;
+
+	//WRITE TO CONSOLE
+	std::cout << "WRITE TO CONSOLE TEST" << std::endl;
+	std::cout << "Using WriteToConsole() function" << std::endl;
+	testString.WriteToConsole();
+	std::cout << std::endl << std::endl;
+
+	//READ FROM CONSOLE
+	std::cout << "READ FROM CONSOLE TEST" << std::endl;
+	std::cout << "Input text: ";
+	input.ReadFromConsole();
+	std::cout << std::endl << "You inputted | " << input << " | into the console" << std::endl;
 }

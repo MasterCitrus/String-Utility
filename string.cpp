@@ -52,7 +52,7 @@ String::String(AdoptPointer, char* str) : _str{str} {
 
 //Destructor.
 String::~String() {
-	delete _str;
+	delete[] _str;
 }
 
 //OPERATOR OVERLOADS

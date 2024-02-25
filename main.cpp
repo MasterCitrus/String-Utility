@@ -103,4 +103,6 @@ int main() {
 	std::cout << "Input text: ";
 	input.ReadFromConsole();
 	std::cout << std::endl << "You inputted | " << input << " | into the console" << std::endl;
+
+	return 0;
 }

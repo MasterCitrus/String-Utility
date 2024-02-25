@@ -1,7 +1,7 @@
 #include "String.h"
 
 
-//Constructors + destructors
+//CONSTRUCTORS + DESTRUCTOR
 
 //Default constructor.
 String::String() : _str{ nullptr } {
@@ -27,7 +27,8 @@ String::String(const char* str) {
 }
 
 //Copy constructor.
-String::String(const String& other) {
+String::String(const String& other) : _str{nullptr} {
+	if (this == &other) return;
 
 	_str = new char[other.Length() + 1];
 
@@ -38,19 +39,25 @@ String::String(const String& other) {
 	_str[String::Length()] = '\0';
 }
 
+//Move constructor.
+String::String(String&& other) noexcept {
+	_str = other._str;
+	other._str = nullptr;
+}
+
 //Wacky constructor???
 String::String(AdoptPointer, char* str) : _str{str} {
 
 }
 
-//Destructor
+//Destructor.
 String::~String() {
 	delete _str;
 }
 
-//Operator overloads
+//OPERATOR OVERLOADS
 
-//Equal to comparison operator == overload
+//Equal to comparison operator == overload.
 bool String::operator==(const String& other) {
 	int a;
 	a = strcmp(_str, other._str);
@@ -59,7 +66,7 @@ bool String::operator==(const String& other) {
 	return false;
 }
 
-//Not equal to comparison operator != overload
+//Not equal to comparison operator != overload.
 bool String::operator!=(const String& other) {
 	int a;
 	a = strcmp(_str, other._str);
@@ -68,19 +75,21 @@ bool String::operator!=(const String& other) {
 	return true;
 }
 
-//Less than operator < overload
+//Less than operator < overload.
 bool String::operator<(const String& other) {
-
-	return true;
+	int a = strcmp(_str, other._str);
+	if (a == -1) return true;
+	else return false;
 }
 
-//Greater than operator > overload
+//Greater than operator > overload.
 bool String::operator>(const String& other) {
-
-	return true;
+	int a = strcmp(_str, other._str);
+	if (a == 1) return true;
+	else return false;
 }
 
-//Assignment operator = overload
+//Copy assignment operator = overload.
 String& String::operator=(const String& str) {
 	if (this == &str) return *this;
 	
@@ -93,7 +102,15 @@ String& String::operator=(const String& str) {
 	return *this;
 }
 
-//Member access operator [] overload
+//Move assignment operator = overload.
+String& String::operator=(String&& other) noexcept {
+	_str = other._str;
+	other._str = nullptr;
+
+	return *this;
+}
+
+//Member access operator [] overload.
 char& String::operator[](size_t index) {
 	if (index > this->Length()) {
 		throw std::out_of_range("Index out of range!");
@@ -101,7 +118,7 @@ char& String::operator[](size_t index) {
 	return _str[index];
 }
 
-//Member access operator [] overload
+//Member access operator [] overload.
 const char& String::operator[](size_t index) const {
 	if (index > this->Length()) {
 		throw std::out_of_range("Index out of range!");
@@ -109,7 +126,7 @@ const char& String::operator[](size_t index) const {
 	return _str[index];
 }
 
-//Arithmetic operator + overload
+//Arithmetic operator + overload.
 String String::operator+(const String& other) const {
 	size_t length = this->Length() + other.Length();
 	String buffer(AdoptPointer{}, new char[length + 1] {});
@@ -118,7 +135,7 @@ String String::operator+(const String& other) const {
 	return buffer;
 }
 
-//Assignment operator += overload
+//Assignment operator += overload.
 String& String::operator+=(const String& other) {
 	size_t length = this->Length() + other.Length();
 	char* str = new char[length + 1] {};
@@ -129,18 +146,18 @@ String& String::operator+=(const String& other) {
 	return *this;
 }
 
-//Insertion operator << overload
+//Insertion operator << overload.
 std::ostream& operator<<(std::ostream& out, const String& str) {
 	return out << str.CStr();
 }
 
-//Extraction operator >> overload
+//Extraction operator >> overload.
 std::istream& operator>>(std::istream& in, String& str) {
 	str.ReadFromConsole();
 	return in;
 }
 
-//Member functions
+//MEMBER FUNCTIONS
 
 //Get length of string.
 size_t String::Length() const {
@@ -261,6 +278,22 @@ size_t String::Find(size_t startIndex, const String& str) {
 
 //Replace all occurences of the first string with the second string.
 String& String::Replace(const String& find, const String& replace) {
+	bool isReplacing = true;
+	while (isReplacing) {
+		int diff = find.Length() - replace.Length();
+		size_t rPos = this->Find(find);
+		if (rPos == -1) isReplacing = false;
+		String original = _str;
+		String buff = original;
+		delete[] _str;
+		_str = new char[buff.Length() + diff + 1];
+		strcpy(_str, buff._str);
+		_str[rPos] = '\0';
+		strcat(_str, replace._str);
+		buff = original;
+		_str[rPos + replace.Length() + 1] = '\0';
+		strcat(_str, buff._str + rPos + find.Length());
+	}
 
 	return *this;
 }
@@ -285,6 +318,7 @@ String& String::WriteToConsole() {
 	return *this;
 }
 
+//Alternates letters into upper and lower.
 String& String::Wobble() {
 	srand(time(nullptr));
 	int r = rand() % 2;

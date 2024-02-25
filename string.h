@@ -7,6 +7,7 @@ public:
 	String();
 	String(const char* str);
 	String(const String& other);
+	String(String&& other) noexcept;
 
 	//Destructor
 	~String();
@@ -35,6 +36,7 @@ public:
 	bool operator<(const String& other);
 	bool operator>(const String& other);
 	String& operator=(const String& str);
+	String& operator=(String&& other) noexcept;
 	char& operator[](size_t index);
 	const char& operator[](size_t index) const;
 	String operator+(const String& other) const;

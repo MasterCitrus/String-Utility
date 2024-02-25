@@ -3,9 +3,9 @@
 #include <string.h>
 
 int main() {
-	String one = "This is a test string";
-	String two = "A second test string";
-	String three = "is";
+	String one = "Your name is $name? Are you sure your name is $name?";
+	String two = "John";
+	String three = "$name";
 	/*String four;
 	String five;
 	three = one + " || " + two;
@@ -17,5 +17,7 @@ int main() {
 	std::cout << five << std::endl;
 
 	std::cout << std::strstr(one.CStr(), "is");*/
-
+	std::cout << one << std::endl;
+	one.Replace(three, two);
+	std::cout << one << std::endl;
 }

@@ -54,5 +54,36 @@ int main() {
 	prepend.Prepend(rhs);
 	std::cout << prepend << std::endl << std::endl;
 
+	//CSTR
+	std::cout << "CSTR TEST" << std::endl;
+	std::cout << testString.CStr() << std::endl << std::endl;;
+
+	//TO LOWER
+	std::cout << "TO LOWER TEST" << std::endl;
+	lower = testString;
+	std::cout << lower << std::endl;
+	lower.ToLower();
+	std::cout << lower << std::endl << std::endl;
+
+	//TO UPPER
+	std::cout << "TO UPPER TEST" << std::endl;
+	upper = testString;
+	std::cout << upper << std::endl;
+	upper.ToUpper();
+	std::cout << upper << std::endl << std::endl;
+
+	//FIND
+	caIndex = rand() % testString.Length();
+	size_t fIndex = testString.Find(caIndex, find);
+	std::cout << "FIND TEST" << std::endl;
+	std::cout << "The string " << find << " starts at index " << testString.Find(find) << std::endl;
+	std::cout << "Starting Find() from index " << caIndex << std::endl;
+	if (fIndex != -1) {
+		std::cout << "The string " << find << " starts at index " << testString.Find(caIndex, find) << std::endl << std::endl;
+	}
+	else {
+		std::cout << "Find() could not find the string after " << caIndex << std::endl << std::endl;
+	}
+
 	
 }

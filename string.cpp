@@ -304,9 +304,9 @@ String& String::ReadFromConsole() {
 	std::cin.get(c);
 	std::cin.putback(c);
 	std::streamsize size = std::cin.rdbuf()->in_avail();
-	String temp(AdoptPointer{}, new char[size + 1] {});
+	String temp(AdoptPointer{}, new char[size] {});
 	std::cin.readsome(temp._str, size);
-	temp[size] = '\0';
+	temp[size - 1] = '\0';
 	*this = temp;
 	&std::ostream::flush;
 	return *this;

@@ -57,51 +57,45 @@ int main() {
 	String find = "TEST";
 	String input;
 
-	std::ofstream file;
-	file.open("log.txt", std::ios::app);
-
-	std::chrono::zoned_time currentTime(std::chrono::current_zone(), std::chrono::system_clock::now());
-
-	file << currentTime << std::endl;
 	//LENGTH
 	int i = rand() % testString.Length();
 	std::cout << i << std::endl;
-	CheckSuccess(testString.Length() == i, "Length Test", file);
+	CheckSuccess(testString.Length() == i, "Length Test");
 
 	//CHARACTER AT
 	size_t caIndex = rand() % testString.Length();
-	CheckSuccess(testString.CharacterAt(caIndex) == 't', "Character At Test", file);
+	CheckSuccess(testString.CharacterAt(caIndex) == 't', "Character At Test");
 	std::cout << testString[caIndex];
 
 	//EQUAL TO
-	CheckSuccess(comp1.EqualTo(comp3), "Equal To Test", file);
+	CheckSuccess(comp1.EqualTo(comp3), "Equal To Test");
 
 	//APPEND
 	append = lhs;
-	CheckSuccess(append.Append(rhs) == "HelloWorld", "Append Test", file);
+	CheckSuccess(append.Append(rhs) == "HelloWorld", "Append Test");
 
 	//PREPEND
 	prepend = lhs;
-	CheckSuccess(prepend.Prepend(rhs) == "WorldHello", "Prepend Test", file);
+	CheckSuccess(prepend.Prepend(rhs) == "WorldHello", "Prepend Test");
 
 	//CSTR
-	CheckSuccess(testString.CStr() == "This is a test string.", "CStr Test", file);
+	CheckSuccess(testString.CStr() == "This is a test string.", "CStr Test");
 
 	//TO LOWER
 	lower = testString;
-	CheckSuccess(testString.ToLower() == "this is a test string.", "To Lower Test", file);
+	CheckSuccess(testString.ToLower() == "this is a test string.", "To Lower Test");
 
 	//TO UPPER
 	upper = testString;
-	CheckSuccess(testString.ToUpper() == "THIS IS A TEST STRING.", "To Upper Test", file);
+	CheckSuccess(testString.ToUpper() == "THIS IS A TEST STRING.", "To Upper Test");
 
 	//FIND
 	size_t loc = 10;
-	CheckSuccess(testString.Find(find) == loc, "Find Test", file);
+	CheckSuccess(testString.Find(find) == loc, "Find Test");
 
 	//REPLACE
-	CheckSuccess(sentence.Replace(findR, replace) == "Your name is John? Are you sure your name is John?", "Replace Test", file);
+	CheckSuccess(sentence.Replace(findR, replace) == "Your name is John? Are you sure your name is John?", "Replace Test");
 	float result = (tests * success) / 100 * 100;
 
-	file << result << "% Successful" << std::endl << std::endl;
+	std::cout << result << "% Successful" << std::endl << std::endl;
 }

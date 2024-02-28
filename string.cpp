@@ -58,7 +58,7 @@ String::~String() {
 //OPERATOR OVERLOADS
 
 //Equal to comparison operator == overload.
-bool String::operator==(const String& other) {
+bool String::operator==(const String& other) const {
 	int a;
 	a = strcmp(_str, other._str);
 
@@ -67,7 +67,7 @@ bool String::operator==(const String& other) {
 }
 
 //Not equal to comparison operator != overload.
-bool String::operator!=(const String& other) {
+bool String::operator!=(const String& other) const {
 	int a;
 	a = strcmp(_str, other._str);
 
@@ -76,14 +76,14 @@ bool String::operator!=(const String& other) {
 }
 
 //Less than operator < overload.
-bool String::operator<(const String& other) {
+bool String::operator<(const String& other) const {
 	int a = strcmp(_str, other._str);
 	if (a == -1) return true;
 	else return false;
 }
 
 //Greater than operator > overload.
-bool String::operator>(const String& other) {
+bool String::operator>(const String& other) const {
 	int a = strcmp(_str, other._str);
 	if (a == 1) return true;
 	else return false;
@@ -197,7 +197,7 @@ bool String::EqualTo(const String& other) const {
 String& String::Append(const String& str) {
 	char* temp = _str;
 	size_t length = strlen(temp) + str.Length() + 1;
-	_str = new char[length];
+	_str = new char[length] {};
 	strcpy(_str, temp);
 	strcat(_str, str._str);
 	delete[] temp;
@@ -241,7 +241,7 @@ String& String::ToUpper() {
 }
 
 //Finds a substring in a string and returns it's location.
-size_t String::Find(const String& str) {
+size_t String::Find(const String& str) const {
 	size_t s1Len = this->Length();
 	size_t s2Len = str.Length();
 	
@@ -260,7 +260,7 @@ size_t String::Find(const String& str) {
 }
 
 //Finds a substring from the specified index of a string and returns it's location.
-size_t String::Find(size_t startIndex, const String& str) {
+size_t String::Find(size_t startIndex, const String& str) const {
 	size_t s1Len = this->Length();
 	size_t s2Len = str.Length();
 
@@ -314,7 +314,7 @@ String& String::ReadFromConsole() {
 }
 
 //Output string to console.
-String& String::WriteToConsole() {
+const String& String::WriteToConsole() const {
 	std::cout << _str;
 	return *this;
 }

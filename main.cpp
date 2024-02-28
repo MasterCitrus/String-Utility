@@ -1,7 +1,42 @@
 #include "String.h"
 #include <string.h>
+
 #include <iostream>
 #include <cassert>
+#include <fstream>
+#include <chrono>
+
+float tests;
+float success;
+float fail;
+
+static bool CheckSuccess(bool expression, const char* message) {
+	tests++;
+	if (!expression) {
+		std::cout << "Test " << tests << " | " << message << " | Failed" << std::endl;
+		fail++;
+		return false;
+	}
+	else {
+		std::cout << "Test " << tests << " | " << message << " | Succeeded" << std::endl;
+		success++;
+		return true;
+	}
+}
+
+static bool CheckSuccess(bool expression, const char* message, std::ofstream &file) {
+	tests++;
+	if (!expression) {
+		file << "Test " << tests << " | " << message << " | Failed" << std::endl;
+		fail++;
+		return false;
+	}
+	else {
+		file << "Test " << tests << " | " << message << " | Succeeded" << std::endl;
+		success++;
+		return true;
+	}
+}
 
 int main() {
 	srand(time(nullptr));
@@ -19,90 +54,54 @@ int main() {
 	String prepend;
 	String lower;
 	String upper;
-	String find = "test";
+	String find = "TEST";
 	String input;
 
+	std::ofstream file;
+	file.open("log.txt", std::ios::app);
 
-	std::cout << std::boolalpha;
+	std::chrono::zoned_time currentTime(std::chrono::current_zone(), std::chrono::system_clock::now());
+
+	file << currentTime << std::endl;
 	//LENGTH
-	std::cout << "LENGTH TEST" << std::endl;
-	std::cout << testString << std::endl;
-	std::cout << "Length is " << testString.Length() << std::endl << std::endl;
+	int i = rand() % testString.Length();
+	std::cout << i << std::endl;
+	CheckSuccess(testString.Length() == i, "Length Test", file);
 
 	//CHARACTER AT
 	size_t caIndex = rand() % testString.Length();
-	std::cout << "CHARACTER AT TEST" << std::endl;
-	std::cout << "Character at " << caIndex << ": " << testString.CharacterAt(caIndex) << std::endl << std::endl;;
+	CheckSuccess(testString.CharacterAt(caIndex) == 't', "Character At Test", file);
+	std::cout << testString[caIndex];
 
 	//EQUAL TO
-	std::cout << "EQUAL TO TEST" << std::endl;
-	std::cout << "Is String 1: " << comp1 << " equal to " << "String 2: " << comp3 << " ?" << std::endl;
-	std::cout << comp1.EqualTo(comp3) << std::endl;
-	std::cout << "Is String 1: " << comp1 << " equal to " << "String 2: " << comp2 << " ?" << std::endl;
-	std::cout << comp1.EqualTo(comp2) << std::endl << std::endl;
+	CheckSuccess(comp1.EqualTo(comp3), "Equal To Test", file);
 
 	//APPEND
-	std::cout << "APPEND TEST" << std::endl;
-	std::cout << "Append " << rhs << " to " << lhs << std::endl;
 	append = lhs;
-	append.Append(rhs);
-	std::cout << append << std::endl << std::endl;
+	CheckSuccess(append.Append(rhs) == "HelloWorld", "Append Test", file);
 
 	//PREPEND
-	std::cout << "PREPEND TEST" << std::endl;
-	std::cout << "Prepend " << rhs << " to " << lhs << std::endl;
 	prepend = lhs;
-	prepend.Prepend(rhs);
-	std::cout << prepend << std::endl << std::endl;
+	CheckSuccess(prepend.Prepend(rhs) == "WorldHello", "Prepend Test", file);
 
 	//CSTR
-	std::cout << "CSTR TEST" << std::endl;
-	std::cout << testString.CStr() << std::endl << std::endl;;
+	CheckSuccess(testString.CStr() == "This is a test string.", "CStr Test", file);
 
 	//TO LOWER
-	std::cout << "TO LOWER TEST" << std::endl;
 	lower = testString;
-	std::cout << lower << std::endl;
-	lower.ToLower();
-	std::cout << lower << std::endl << std::endl;
+	CheckSuccess(testString.ToLower() == "this is a test string.", "To Lower Test", file);
 
 	//TO UPPER
-	std::cout << "TO UPPER TEST" << std::endl;
 	upper = testString;
-	std::cout << upper << std::endl;
-	upper.ToUpper();
-	std::cout << upper << std::endl << std::endl;
+	CheckSuccess(testString.ToUpper() == "THIS IS A TEST STRING.", "To Upper Test", file);
 
 	//FIND
-	caIndex = rand() % testString.Length();
-	size_t fIndex = testString.Find(caIndex, find);
-	std::cout << "FIND TEST" << std::endl;
-	std::cout << "The string " << find << " starts at index " << testString.Find(find) << std::endl;
-	std::cout << "Starting Find() from index " << caIndex << std::endl;
-	if (fIndex != -1) {
-		std::cout << "The string " << find << " starts at index " << testString.Find(caIndex, find) << std::endl << std::endl;
-	}
-	else {
-		std::cout << "Find() could not find the string after " << caIndex << std::endl << std::endl;
-	}
+	size_t loc = 10;
+	CheckSuccess(testString.Find(find) == loc, "Find Test", file);
 
 	//REPLACE
-	std::cout << "REPLACE TEST" << std::endl;
-	std::cout << sentence << std::endl;
-	sentence.Replace(findR, replace);
-	std::cout << sentence << std::endl << std::endl;
+	CheckSuccess(sentence.Replace(findR, replace) == "Your name is John? Are you sure your name is John?", "Replace Test", file);
+	float result = (tests * success) / 100 * 100;
 
-	//WRITE TO CONSOLE
-	std::cout << "WRITE TO CONSOLE TEST" << std::endl;
-	std::cout << "Using WriteToConsole() function" << std::endl;
-	testString.WriteToConsole();
-	std::cout << std::endl << std::endl;
-
-	//READ FROM CONSOLE
-	std::cout << "READ FROM CONSOLE TEST" << std::endl;
-	std::cout << "Input text: ";
-	input.ReadFromConsole();
-	std::cout << std::endl << "You inputted | " << input << " | into the console" << std::endl;
-
-	return 0;
+	file << result << "% Successful" << std::endl << std::endl;
 }

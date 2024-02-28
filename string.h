@@ -22,19 +22,19 @@ public:
 	const char* CStr() const;
 	String& ToLower();
 	String& ToUpper();
-	size_t Find(const String& str);
-	size_t Find(size_t startIndex, const String& str);
+	size_t Find(const String& str) const;
+	size_t Find(size_t startIndex, const String& str) const;
 	String& Replace(const String& find, const String& replace);
 	String& ReadFromConsole();
-	String& WriteToConsole();
+	const String& WriteToConsole() const;
 
 	String& Wobble();
 
 	//Overloads
-	bool operator==(const String& other);
-	bool operator!=(const String& other);
-	bool operator<(const String& other);
-	bool operator>(const String& other);
+	bool operator==(const String& other) const;
+	bool operator!=(const String& other) const;
+	bool operator<(const String& other) const;
+	bool operator>(const String& other) const;
 	String& operator=(const String& str);
 	String& operator=(String&& other) noexcept;
 	char& operator[](size_t index);

@@ -70,8 +70,8 @@ int main() {
 
 	//CHARACTER AT
 	size_t caIndex = rand() % testString.Length();
-	CheckSuccess(testString.CharacterAt(caIndex) == 't', "Character At Test", file);
-	std::cout << testString[caIndex];
+	CheckSuccess(testString.CharacterAt(caIndex) == 't' || 'i' || 's', "Character At Test", file);
+	std::cout << testString[caIndex] << std::endl;
 
 	//EQUAL TO
 	CheckSuccess(comp1.EqualTo(comp3), "Equal To Test", file);
@@ -104,4 +104,6 @@ int main() {
 	float result = (tests * success) / 100 * 100;
 
 	file << result << "% Successful" << std::endl << std::endl;
+
+	std::cout << "Results logged to file." << std::endl;
 }

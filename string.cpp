@@ -284,7 +284,7 @@ String& String::Replace(const String& find, const String& replace) {
 	while (isReplacing) {
 		int diff = find.Length() - replace.Length();
 		size_t rPos = this->Find(find);
-		if (rPos == -1) isReplacing = false;
+		if (rPos == -1) break;
 		String buff = _str;
 		delete[] _str;
 		_str = new char[buff.Length() + diff + 1];
@@ -304,10 +304,11 @@ String& String::ReadFromConsole() {
 	std::cin.get(c);
 	std::cin.putback(c);
 	std::streamsize size = std::cin.rdbuf()->in_avail();
-	String temp(AdoptPointer{}, new char[size] {});
-	std::cin.readsome(temp._str, size);
+	char* temp = new char[size] {};
+	std::cin.readsome(temp, size);
 	temp[size - 1] = '\0';
-	*this = temp;
+	delete[] _str;
+	_str = temp;
 	&std::ostream::flush;
 	return *this;
 }

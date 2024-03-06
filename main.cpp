@@ -1,8 +1,6 @@
 #include "String.h"
-#include <string.h>
 
 #include <iostream>
-#include <cassert>
 #include <fstream>
 #include <chrono>
 

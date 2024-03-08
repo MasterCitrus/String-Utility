@@ -22,7 +22,7 @@ String::String(const char* str) {
 
 		strncpy(_str, str, length);
 
-		_str[length] = '\0';
+		//_str[length] = '\0';
 	}
 }
 

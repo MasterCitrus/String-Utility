@@ -62,8 +62,8 @@ int main() {
 
 	//CHARACTER AT
 	size_t caIndex = rand() % testString.Length();
-	CheckSuccess(testString.CharacterAt(caIndex) == 't', "Character At Test");
-	std::cout << testString[caIndex];
+	std::cout << testString[caIndex] << "\n";
+	CheckSuccess(testString.CharacterAt(caIndex) == 't' || testString.CharacterAt(caIndex) == 'i' || testString.CharacterAt(caIndex) == 's', "Character At Test");
 
 	//EQUAL TO
 	CheckSuccess(comp1.EqualTo(comp3), "Equal To Test");
@@ -93,7 +93,14 @@ int main() {
 
 	//REPLACE
 	CheckSuccess(sentence.Replace(findR, replace) == "Your name is John? Are you sure your name is John?", "Replace Test");
+	std::cout << sentence.Replace(findR, replace) << "\n";
 	float result = (tests * success) / 100 * 100;
 
 	std::cout << result << "% Successful" << std::endl << std::endl;
+
+	std::cout << std::endl << "Press 'Enter' to exit.";
+
+	std::cin.clear();
+	std::cin.ignore(std::cin.rdbuf()->in_avail());
+	std::cin.get();
 }

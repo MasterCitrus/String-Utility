@@ -104,4 +104,10 @@ int main() {
 	file << result << "% Successful" << std::endl << std::endl;
 
 	std::cout << "Results logged to file." << std::endl;
+
+	std::cout << std::endl << "Press 'Enter' to exit.";
+
+	std::cin.clear();
+	std::cin.ignore(std::cin.rdbuf()->in_avail());
+	std::cin.get();
 }

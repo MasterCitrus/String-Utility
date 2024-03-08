@@ -68,7 +68,7 @@ int main() {
 
 	//CHARACTER AT
 	size_t caIndex = rand() % testString.Length();
-	CheckSuccess(testString.CharacterAt(caIndex) == 't' || 'i' || 's', "Character At Test", file);
+	CheckSuccess(testString.CharacterAt(caIndex) == 't' || testString.CharacterAt(caIndex) == 'i' || testString.CharacterAt(caIndex) == 's', "Character At Test", file);
 	std::cout << testString[caIndex] << std::endl;
 
 	//EQUAL TO

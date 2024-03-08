@@ -93,7 +93,6 @@ int main() {
 
 	//REPLACE
 	CheckSuccess(sentence.Replace(findR, replace) == "Your name is John? Are you sure your name is John?", "Replace Test");
-	std::cout << sentence.Replace(findR, replace) << "\n";
 	float result = (tests * success) / 100 * 100;
 
 	std::cout << result << "% Successful" << std::endl << std::endl;

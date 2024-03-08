@@ -20,7 +20,7 @@ String::String(const char* str) {
 	else {
 		_str = new char[length + 1];
 
-		strncpy(_str, str, length);
+		strcpy(_str, str, length);
 
 		//_str[length] = '\0';
 	}

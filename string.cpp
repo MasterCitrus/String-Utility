@@ -12,31 +12,20 @@ String::String() : _str{ nullptr } {
 //Single parameter constructor.
 String::String(const char* str) {
 	size_t length = strlen(str);
-	if (str == nullptr) {
-		_str = new char[1];
-		_str[0] = '\0';
-	}
-
-	else {
-		_str = new char[length + 1];
-
-		strcpy(_str, str);
-
-		//_str[length] = '\0';
-	}
+	_str = new char[length + 1];
+	strcpy(_str, str);
 }
 
 //Copy constructor.
-String::String(const String& other) : _str{nullptr} {
+String::String(const String& other) : _str{ nullptr } {
 	if (this == &other) return;
+	size_t length = other.Length();
 
-	_str = new char[other.Length() + 1];
+	_str = new char[length + 1];
 
-	for (int i = 0; i < other.Length(); i++) {
+	for (int i = 0; i < length; i++) {
 		_str[i] = other._str[i];
 	}
-
-	_str[String::Length()] = '\0';
 }
 
 //Move constructor.
@@ -46,7 +35,7 @@ String::String(String&& other) noexcept : _str(nullptr) {
 }
 
 //Wacky constructor???
-String::String(AdoptPointer, char* str) : _str{str} {
+String::String(AdoptPointer, char* str) : _str{ str } {
 
 }
 
@@ -63,7 +52,7 @@ bool String::operator==(const String& other) const {
 	a = strcmp(_str, other._str);
 
 	if (a == 0) return true;
-	return false;
+	else  return false;
 }
 
 //Not equal to comparison operator != overload.
@@ -71,8 +60,8 @@ bool String::operator!=(const String& other) const {
 	int a;
 	a = strcmp(_str, other._str);
 
-	if (a == 0) return false;
-	return true;
+	if (a == -1 || a == 1) return true;
+	else return false;
 }
 
 //Less than operator < overload.
@@ -92,7 +81,7 @@ bool String::operator>(const String& other) const {
 //Copy assignment operator = overload.
 String& String::operator=(const String& str) {
 	if (this == &str) return *this;
-	
+
 	delete[] _str;
 	size_t length = str.Length();
 	_str = new char[length + 1];
@@ -114,16 +103,18 @@ String& String::operator=(String&& other) noexcept {
 
 //Member access operator [] overload.
 char& String::operator[](size_t index) {
-	if (index > this->Length()) {
-		throw std::out_of_range("Index out of range!");
+	size_t length = this->Length();
+	if (index > length) {
+		return _str[length];
 	}
 	return _str[index];
 }
 
 //Member access operator [] overload.
 const char& String::operator[](size_t index) const {
-	if (index > this->Length()) {
-		throw std::out_of_range("Index out of range!");
+	size_t length = this->Length();
+	if (index > length) {
+		return _str[length];
 	}
 	return _str[index];
 }
@@ -197,7 +188,7 @@ bool String::EqualTo(const String& other) const {
 String& String::Append(const String& str) {
 	char* temp = _str;
 	size_t length = strlen(temp) + str.Length() + 1;
-	_str = new char[length] {};
+	_str = new char[length];
 	strcpy(_str, temp);
 	strcat(_str, str._str);
 	delete[] temp;
@@ -244,7 +235,7 @@ String& String::ToUpper() {
 size_t String::Find(const String& str) const {
 	size_t s1Len = this->Length();
 	size_t s2Len = str.Length();
-	
+
 	for (size_t i = 0; i < s1Len; i++) {
 		size_t j;
 		for (j = 0; j < s2Len; j++) {

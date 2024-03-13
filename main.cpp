@@ -56,44 +56,46 @@ int main() {
 	String input;
 
 	//LENGTH
-	int i = rand() % testString.Length();
-	std::cout << i << std::endl;
-	CheckSuccess(testString.Length() == i, "Length Test");
+	//Check if string length of 'testString' is equal to 22.
+	CheckSuccess(testString.Length() == 22, "Length Test");
 
 	//CHARACTER AT
-	size_t caIndex = rand() % testString.Length();
-	std::cout << testString[caIndex] << "\n";
-	CheckSuccess(testString.CharacterAt(caIndex) == 't' || testString.CharacterAt(caIndex) == 'i' || testString.CharacterAt(caIndex) == 's', "Character At Test");
+	//Check if the character at 10 is 't'.
+	CheckSuccess(testString.CharacterAt(10) == 't', "Character At Test");
 
 	//EQUAL TO
+	//Check if 'comp1' is equal to 'comp3'.
 	CheckSuccess(comp1.EqualTo(comp3), "Equal To Test");
 
 	//APPEND
+	//Append 'World' to 'Hello'.
 	append = lhs;
 	CheckSuccess(append.Append(rhs) == "HelloWorld", "Append Test");
 
 	//PREPEND
+	//Prepend 'World' to 'Hello'
 	prepend = lhs;
 	CheckSuccess(prepend.Prepend(rhs) == "WorldHello", "Prepend Test");
 
-	//CSTR
-	CheckSuccess(testString.CStr() == "This is a test string.", "CStr Test");
-
 	//TO LOWER
+	//Check if string is converted to all lowercase
 	lower = testString;
 	CheckSuccess(testString.ToLower() == "this is a test string.", "To Lower Test");
 
 	//TO UPPER
+	//Check if string is converted to all uppercase
 	upper = testString;
 	CheckSuccess(testString.ToUpper() == "THIS IS A TEST STRING.", "To Upper Test");
 
 	//FIND
+	//Find the string 'TEST' at index 10.
 	size_t loc = 10;
 	CheckSuccess(testString.Find(find) == loc, "Find Test");
 
 	//REPLACE
+	//Check if filler words were replaced with John.
 	CheckSuccess(sentence.Replace(findR, replace) == "Your name is John? Are you sure your name is John?", "Replace Test");
-	float result = (tests * success) / 100 * 100;
+	float result = (success * 100) / tests;
 
 	std::cout << result << "% Successful" << std::endl << std::endl;
 

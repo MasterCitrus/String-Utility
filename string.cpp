@@ -58,21 +58,21 @@ bool String::operator!=(const String& other) const {
 	int a;
 	a = strcmp(_str, other._str);
 
-	if (a == -1 || a == 1) return true;
-	else return false;
+	if (a == 0) return false;
+	else return true;
 }
 
 //Less than operator < overload.
 bool String::operator<(const String& other) const {
 	int a = strcmp(_str, other._str);
-	if (a == -1) return true;
+	if (a < 0) return true;
 	else return false;
 }
 
 //Greater than operator > overload.
 bool String::operator>(const String& other) const {
 	int a = strcmp(_str, other._str);
-	if (a == 1) return true;
+	if (a > 0) return true;
 	else return false;
 }
 
@@ -101,19 +101,11 @@ String& String::operator=(String&& other) noexcept {
 
 //Member access operator [] overload.
 char& String::operator[](size_t index) {
-	size_t length = this->Length();
-	if (index > length) {
-		return _str[length];
-	}
 	return _str[index];
 }
 
 //Member access operator [] overload.
 const char& String::operator[](size_t index) const {
-	size_t length = this->Length();
-	if (index > length) {
-		return _str[length];
-	}
 	return _str[index];
 }
 
